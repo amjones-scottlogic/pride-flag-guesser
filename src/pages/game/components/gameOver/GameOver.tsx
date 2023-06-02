@@ -12,13 +12,15 @@ type GameOverProps = {
 function GameOver({ gameResults, onPlayClick }: GameOverProps) {
   const titleText = gameResults.completed ? "You got them all!" : "Game Over!";
 
-  const skippedFlagsContent = Object.keys(gameResults.skippedFlags).map(
-    (key) => {
-      const flag = gameResults.skippedFlags[key];
+  const skippedFlagKeys = Object.keys(gameResults.skippedFlags);
 
-      return <FlagCard flag={flag} />;
-    }
-  );
+  const skippedFlagsContent = skippedFlagKeys.map((key) => {
+    const flag = gameResults.skippedFlags[key];
+
+    return <FlagCard flag={flag} />;
+  });
+
+  const hasSkippedFlags = skippedFlagKeys.length > 0;
 
   return (
     <div>
@@ -34,14 +36,16 @@ function GameOver({ gameResults, onPlayClick }: GameOverProps) {
           Play Again
         </button>
       </div>
-      <div className="flex justify-center content-center mt-6">
-        <div className="flex flex-col justify-center">
-          <h1 className="text-2xl text-center">Skipped flags</h1>
-          <div className="flex flex-wrap justify-center mt-2">
-            {skippedFlagsContent}
+      {hasSkippedFlags && (
+        <div className="flex justify-center content-center mt-6">
+          <div className="flex flex-col justify-center">
+            <h1 className="text-2xl text-center">Skipped flags</h1>
+            <div className="flex flex-wrap justify-center mt-2">
+              {skippedFlagsContent}
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
