@@ -1,5 +1,6 @@
 import React from "react";
 import { GameResults } from "../types";
+import FlagCard from "../../../components/flagCard/FlagCard";
 
 type GameOverProps = {
   gameResults: GameResults;
@@ -8,6 +9,14 @@ type GameOverProps = {
 
 function GameOver({ gameResults, onPlayClick }: GameOverProps) {
   const titleText = gameResults.completed ? "You got them all!" : "Game Over!";
+
+  const skippedFlagsContent = Object.keys(gameResults.skippedFlags).map(
+    (key) => {
+      const flag = gameResults.skippedFlags[key];
+
+      return <FlagCard flag={flag} />;
+    }
+  );
 
   return (
     <div>
@@ -22,6 +31,14 @@ function GameOver({ gameResults, onPlayClick }: GameOverProps) {
         >
           Play Again
         </button>
+      </div>
+      <div className="flex justify-center content-center mt-6">
+        <div className="flex flex-col justify-center">
+          <h1 className="text-2xl text-center">Skipped flags</h1>
+          <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 mt-2">
+            {skippedFlagsContent}
+          </div>
+        </div>
       </div>
     </div>
   );

@@ -1,6 +1,8 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { FLAGS, MAX_TIME } from "../../constants";
-import { Flag, GameResults } from "../../types";
+import { Dictionary, Flag, GameResults } from "../../types";
+
+import "./Game.css";
 
 type GameProps = {
   onComplete: (results: GameResults) => void;
@@ -22,25 +24,30 @@ const getNextFlag = (
   return nextFlag;
 };
 
+const ARROW_PATH = "M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3";
+const CROSS_PATH = "M6 18L18 6M6 6l12 12";
+
 function Game({ onComplete }: GameProps) {
   const [remainingTime, setRemainingTime] = useState<number>(MAX_TIME);
   const [score, setScore] = useState<number>(0);
   const [remainingFlags, setRemainingFlags] =
     useState<ReadonlyArray<Flag>>(FLAGS);
+  const [skippedFlags, setSkippedFlags] = useState<Dictionary<Flag>>({});
   const [currentFlag, setCurrentFlag] = useState<Flag | null>(null);
   const [answer, setAnswer] = useState<string>("");
+  const [isAnswerWrong, setIsAnswerWrong] = useState<boolean>(false);
 
   useEffect(() => {
     const timer = setInterval(() => {
       setRemainingTime(remainingTime - 1);
 
       if (remainingTime <= 0) {
-        onComplete({ score, completed: false });
+        onComplete({ score, completed: false, skippedFlags });
       }
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [remainingTime, setRemainingTime, onComplete, score]);
+  }, [remainingTime, setRemainingTime, onComplete, score, skippedFlags]);
 
   useEffect(() => {
     const nextFlag = getNextFlag(remainingFlags, currentFlag, false);
@@ -73,19 +80,39 @@ function Game({ onComplete }: GameProps) {
   };
 
   const skipFlag = () => {
+    if (currentFlag && !skippedFlags[currentFlag.id]) {
+      const newSkippedFlags = {
+        ...skippedFlags,
+        [currentFlag.id]: currentFlag,
+      };
+
+      setSkippedFlags(newSkippedFlags);
+    }
+
     const nextFlag = getNextFlag(remainingFlags, currentFlag, true);
     setCurrentFlag(nextFlag);
   };
 
-  const handleIncorrectAnswer = () => {};
+  const handleIncorrectAnswer = () => {
+    setIsAnswerWrong(true);
+  };
 
   const handleCorrectAnswer = () => {
+    if (currentFlag && skippedFlags[currentFlag.id]) {
+      const newSkippedFlags = {
+        ...skippedFlags,
+      };
+      delete newSkippedFlags[currentFlag.id];
+
+      setSkippedFlags(newSkippedFlags);
+    }
+
     const newRemainingFlags = remainingFlags.filter(
       (flag) => flag.id !== currentFlag?.id
     );
 
     if (newRemainingFlags.length === 0) {
-      onComplete({ score: score + 1, completed: true });
+      onComplete({ score: score + 1, completed: true, skippedFlags });
     }
 
     setScore(score + 1);
@@ -96,6 +123,15 @@ function Game({ onComplete }: GameProps) {
     const nextFlag = getNextFlag(remainingFlags, currentFlag, true);
     setCurrentFlag(nextFlag);
   };
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setIsAnswerWrong(false);
+    setAnswer(event.target.value);
+  };
+
+  const submitButtonClass = isAnswerWrong
+    ? "submit-button submit-button--error text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800"
+    : "submit-button text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800";
 
   return (
     <>
@@ -119,18 +155,30 @@ function Game({ onComplete }: GameProps) {
           <div className="flex">
             <div className="flex-1">
               <input
-                onChange={(e) => setAnswer(e.target.value)}
+                onChange={handleInputChange}
                 value={answer}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Flag"
               />
             </div>
-            <div className="flex-none pl-4 content-end">
-              <button
-                type="submit"
-                className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-              >
-                Submit
+            <div className="flex flex-none pl-4 content-end">
+              <button type="submit" className={submitButtonClass}>
+                <span>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d={isAnswerWrong ? CROSS_PATH : ARROW_PATH}
+                    />
+                  </svg>
+                </span>
               </button>
               <button
                 type="button"

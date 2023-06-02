@@ -14,6 +14,7 @@ enum GameState {
 const intialGameResults: GameResults = {
   score: 0,
   completed: false,
+  skippedFlags: {},
 };
 
 function GamePage() {
