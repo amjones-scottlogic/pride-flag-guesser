@@ -9,14 +9,14 @@ type FlagCardProps = {
 
 function FlagCard({ flag }: FlagCardProps) {
   return (
-    <div className="container flex flex-row m-2 px-2">
+    <div className="flag-card flex flex-row m-2 px-2">
       <div className="flex flex-col justify-center">
         <img className="flag-image" src={flag.icon} alt="flag" />
       </div>
       <div className="flex flex-col justify-center pl-2">
-        <p className="text-xl">{flag.id}</p>
+        <p className="text-base font-bold">{flag.id}</p>
         <a
-          className="font-bold"
+          className="text-sm"
           href={flag.link}
           target="_blank"
           rel="noreferrer"

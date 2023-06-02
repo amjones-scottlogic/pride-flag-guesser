@@ -1,6 +1,8 @@
 import React from "react";
-import { GameResults } from "../types";
-import FlagCard from "../../../components/flagCard/FlagCard";
+import { GameResults } from "../../types";
+import FlagCard from "../../../../components/flagCard/FlagCard";
+
+import "./GameOver.css";
 
 type GameOverProps = {
   gameResults: GameResults;
@@ -35,7 +37,7 @@ function GameOver({ gameResults, onPlayClick }: GameOverProps) {
       <div className="flex justify-center content-center mt-6">
         <div className="flex flex-col justify-center">
           <h1 className="text-2xl text-center">Skipped flags</h1>
-          <div className="grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-2 mt-2">
+          <div className="flex flex-wrap justify-center mt-2">
             {skippedFlagsContent}
           </div>
         </div>

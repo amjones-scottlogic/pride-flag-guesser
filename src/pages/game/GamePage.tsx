@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Page from "../../components/page/Page";
 import Game from "./components/Game/Game";
 import Instructions from "./components/Instructions";
-import GameOver from "./components/GameOver";
+import GameOver from "./components/gameOver/GameOver";
 import { GameResults } from "./types";
 
 enum GameState {
