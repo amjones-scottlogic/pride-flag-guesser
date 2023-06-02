@@ -1,4 +1,4 @@
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import { FLAGS, MAX_TIME } from "../../constants";
 import { Dictionary, Flag, GameResults } from "../../types";
 
@@ -36,6 +36,8 @@ function Game({ onComplete }: GameProps) {
   const [currentFlag, setCurrentFlag] = useState<Flag | null>(null);
   const [answer, setAnswer] = useState<string>("");
   const [isAnswerWrong, setIsAnswerWrong] = useState<boolean>(false);
+
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -75,8 +77,11 @@ function Game({ onComplete }: GameProps) {
 
   const handleSkipClicked = (event: FormEvent) => {
     event.preventDefault();
-
     skipFlag();
+
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   const skipFlag = () => {
@@ -157,6 +162,8 @@ function Game({ onComplete }: GameProps) {
               <input
                 onChange={handleInputChange}
                 value={answer}
+                autoFocus
+                ref={inputRef}
                 className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="Flag"
               />
