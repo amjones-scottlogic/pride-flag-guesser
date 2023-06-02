@@ -58,4 +58,9 @@ export const FLAGS: ReadonlyArray<Flag> = [
     names: ["Pansexual", "Pan", "Pans"],
     icon: "https://assets.volvo.com/is/image/VolvoInformationTechnologyAB/image11?qlt=82&wid=768&ts=1670910888857&dpr=off&fit=constrain&fmt=png-alpha",
   },
+  {
+    id: "Gender fluid",
+    names: ["Gender Fluid", "Fluid", "Genderfluid"],
+    icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b8/Genderfluidity_Pride-Flag.svg/1920px-Genderfluidity_Pride-Flag.svg.png",
+  },
 ];

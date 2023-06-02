@@ -111,7 +111,7 @@ function Game({ onComplete }: GameProps) {
       </div>
       <div className="container">
         <div>
-          <img src={currentFlag?.icon} alt="flag" />
+          <img className="w-full" src={currentFlag?.icon} alt="flag" />
         </div>
       </div>
       <div className="container py-8">
