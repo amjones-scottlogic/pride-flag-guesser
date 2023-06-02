@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/pride-flag-guesser/static/css/main.7a35c7fb.css",
-    "main.js": "/pride-flag-guesser/static/js/main.e3123ba8.js",
+    "main.js": "/pride-flag-guesser/static/js/main.2fe9cf80.js",
     "static/js/787.eece3ac9.chunk.js": "/pride-flag-guesser/static/js/787.eece3ac9.chunk.js",
     "index.html": "/pride-flag-guesser/index.html",
     "main.7a35c7fb.css.map": "/pride-flag-guesser/static/css/main.7a35c7fb.css.map",
-    "main.e3123ba8.js.map": "/pride-flag-guesser/static/js/main.e3123ba8.js.map",
+    "main.2fe9cf80.js.map": "/pride-flag-guesser/static/js/main.2fe9cf80.js.map",
     "787.eece3ac9.chunk.js.map": "/pride-flag-guesser/static/js/787.eece3ac9.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7a35c7fb.css",
-    "static/js/main.e3123ba8.js"
+    "static/js/main.2fe9cf80.js"
   ]
 }
