@@ -4,9 +4,11 @@ import Game from "./components/Game/Game";
 import Instructions from "./components/Instructions";
 import GameOver from "./components/gameOver/GameOver";
 import { GameResults } from "./types";
+import FlagGuide from "./components/FlagGuide";
 
 enum GameState {
   Setup,
+  FlagGuide,
   Playing,
   GameOver,
 }
@@ -33,6 +35,10 @@ function GamePage() {
     setGameState(GameState.Playing);
   };
 
+  const handleGuideClicked = () => {
+    setGameState(GameState.FlagGuide);
+  };
+
   const handleGameOver = (results: GameResults) => {
     setGameResults(results);
     setGameState(GameState.GameOver);
@@ -40,14 +46,26 @@ function GamePage() {
 
   switch (gameState) {
     case GameState.Setup:
-      content = <Instructions onPlayClick={handlePlayClicked} />;
+      content = (
+        <Instructions
+          onPlayClick={handlePlayClicked}
+          onGuideClick={handleGuideClicked}
+        />
+      );
+      break;
+    case GameState.FlagGuide:
+      content = <FlagGuide onPlayClick={handlePlayClicked} />;
       break;
     case GameState.Playing:
       content = <Game onComplete={handleGameOver} />;
       break;
     case GameState.GameOver:
       content = (
-        <GameOver gameResults={gameResults} onPlayClick={handlePlayClicked} />
+        <GameOver
+          gameResults={gameResults}
+          onPlayClick={handlePlayClicked}
+          onGuideClick={handleGuideClicked}
+        />
       );
       break;
   }
