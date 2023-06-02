@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pride-flag-guesser/static/css/main.6f2fa89e.css",
-    "main.js": "/pride-flag-guesser/static/js/main.8b9f3a36.js",
+    "main.css": "/pride-flag-guesser/static/css/main.ec71530c.css",
+    "main.js": "/pride-flag-guesser/static/js/main.21a17d76.js",
     "static/js/787.eece3ac9.chunk.js": "/pride-flag-guesser/static/js/787.eece3ac9.chunk.js",
     "index.html": "/pride-flag-guesser/index.html",
-    "main.6f2fa89e.css.map": "/pride-flag-guesser/static/css/main.6f2fa89e.css.map",
-    "main.8b9f3a36.js.map": "/pride-flag-guesser/static/js/main.8b9f3a36.js.map",
+    "main.ec71530c.css.map": "/pride-flag-guesser/static/css/main.ec71530c.css.map",
+    "main.21a17d76.js.map": "/pride-flag-guesser/static/js/main.21a17d76.js.map",
     "787.eece3ac9.chunk.js.map": "/pride-flag-guesser/static/js/787.eece3ac9.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.6f2fa89e.css",
-    "static/js/main.8b9f3a36.js"
+    "static/css/main.ec71530c.css",
+    "static/js/main.21a17d76.js"
   ]
 }
