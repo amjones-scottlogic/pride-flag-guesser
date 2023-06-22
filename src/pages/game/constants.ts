@@ -11,7 +11,7 @@ export const FLAGS: ReadonlyArray<Flag> = [
   },
   {
     id: "Progress Pride",
-    names: ["Progress Pride", "Progress"],
+    names: ["Progress Pride", "Progress", "Prog"],
     icon: "https://assets.volvo.com/is/image/VolvoInformationTechnologyAB/image6?qlt=82&wid=768&ts=1670910647944&dpr=off&fit=constrain&fmt=png-alpha",
     link: "https://en.wikipedia.org/wiki/Rainbow_flag_(LGBT)#Progress_Pride_Flag",
   },
@@ -29,7 +29,7 @@ export const FLAGS: ReadonlyArray<Flag> = [
   },
   {
     id: "Gay Men (MLM)",
-    names: ["Gay Men", "MLM"],
+    names: ["Gay Men", "MLM", "Gay Man"],
     icon: "https://assets.volvo.com/is/image/VolvoInformationTechnologyAB/image14?qlt=82&wid=768&ts=1670911241536&dpr=off&fit=constrain&fmt=png-alpha",
     link: "https://en.m.wikipedia.org/wiki/File:New_Gay_Pride_Flag.svg",
   },
@@ -41,7 +41,7 @@ export const FLAGS: ReadonlyArray<Flag> = [
   },
   {
     id: "Asexual",
-    names: ["Asexual"],
+    names: ["Asexual", "Ace"],
     icon: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Asexual_Pride_Flag.svg/1280px-Asexual_Pride_Flag.svg.png",
     link: "https://en.m.wikipedia.org/wiki/Asexuality#Flag",
   },
